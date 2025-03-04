@@ -1,0 +1,5 @@
+.env
+node_modules
+db/data/*
+valkey/data/*
+!valkey/data/.gitkeep

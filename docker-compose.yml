@@ -1,0 +1,48 @@
+services:
+  app:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: node:22
+    working_dir: /app
+    entrypoint: ./boot
+    restart: always
+    ports:
+      - "3000:$WEB_PORT"
+    environment:
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DB_PORT: $DB_PORT
+      REDIS_HOST: $REDIS_HOST
+      REDIS_PORT: $REDIS_PORT
+      WEB_PORT: $WEB_PORT
+      VAPID_SUBJECT: $VAPID_SUBJECT
+      VAPID_PUBLIC_KEY: $VAPID_PUBLIC_KEY
+      VAPID_PRIVATE_KEY: $VAPID_PRIVATE_KEY
+    depends_on:
+      - db
+      - valkey
+    volumes:
+      - .:/app
+
+  db:
+    image: mysql:8.0.40
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+      TZ: Asia/Tokyo
+    # ports:
+    #   - "3306:3306"
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+
+  valkey:
+    image: valkey/valkey:8.0.1
+    restart: always
+    # ports:
+    #   - "6379:6379"
+    volumes:
+      - ./valkey/data:/var/lib/valkey
