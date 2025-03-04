@@ -1,0 +1,4 @@
+#!/bin/bash
+
+TOKEN=$(curl -s -X POST -H "Content-Type: application/json" -d '{ "userId": "sakura" }' https://login.example.com/api/notifications | jq -r .token)
+curl -s https://login.example.com/api/authentication/${TOKEN} | jq -r .userId

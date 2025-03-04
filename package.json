@@ -1,0 +1,30 @@
+{
+  "name": "my-pwa-app",
+  "version": "1.0.0",
+  "description": "A PWA application with push notifications and MySQL backend.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "iovalkey": "^0.3.1",
+    "knex": "^3.1.0",
+    "mysql2": "^3.12.0",
+    "uuid": "^11.1.0",
+    "web-push": "^3.4.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "keywords": [
+    "PWA",
+    "push notifications",
+    "Node.js",
+    "MySQL"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
