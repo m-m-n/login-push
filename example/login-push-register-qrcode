@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BASE_URL=$1
+if [ -z "$BASE_URL" ]; then
+  echo "Usage: $(basename $0) BASE_URL"
+  echo "  QRコードのデータを標準出力に表示します"
+  exit 1
+fi
+
+qrencode -o - "${BASE_URL}/?userid=$(id -un)"
