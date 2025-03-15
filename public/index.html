@@ -12,11 +12,25 @@
         <h1>ログインユーザー情報</h1>
         <form id="loginForm">
             <label for="userId">ユーザーID:</label>
-            <input type="text" id="userId" name="userId" required>
-            <button type="submit">登録する</button>
+            <input type="hidden" id="userId" name="userId" required>
+            <button type="submit" disabled id="registerButton">プッシュ通知を登録する</button>
         </form>
 
         <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const registerButton = document.getElementById("registerButton");
+                const userIdInput = document.getElementById("userId");
+
+                const rulParams = new URLSearchParams(window.location.search);
+                const userId = rulParams.get("userId");
+
+                if (userId) {
+                    userIdInput.value = userId;
+                    registerButton.disabled = false;
+                } else {
+                    alert("ユーザーID不明です");
+                }
+            });
             document.getElementById("loginForm").addEventListener("submit", async function (event) {
                 event.preventDefault();
                 const userId = document.getElementById("userId").value;
