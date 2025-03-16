@@ -21,8 +21,11 @@ self.addEventListener("push", function (event) {
     );
 });
 
+let clicked = false;
 self.addEventListener("notificationclick", function (event) {
+    clicked = true;
     event.notification.close();
+
     if (event.action === "login") {
         event.waitUntil(
             fetch(event.notification.data.callbackUrl, {
@@ -45,7 +48,8 @@ self.addEventListener("notificationclick", function (event) {
 });
 
 self.addEventListener("notificationclose", function (event) {
-    if (event.action === "login") {
+    if (clicked) {
+        clicked = false;
         return;
     }
 
